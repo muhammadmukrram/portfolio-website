@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Portfolio</title>
+<title>About Me - Mukrram Portfolio</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
 <style>
 
@@ -235,6 +236,10 @@ margin:30px 0;
                     web experiences.
                 </p>
 
+                <a href="contact.html" class="btn btn-primary mt-3">
+                    Contact Me
+                </a>
+
             </div>
 
         </div>
@@ -262,6 +267,26 @@ margin:30px 0;
                     responsive and user-friendly websites using HTML,
                     CSS, Bootstrap and JavaScript.
                 </p>
+
+                <div class="social-icons d-flex justify-content-center justify-content-md-start gap-3 mt-3">
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="#" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                </div>
 
             </div>
 
@@ -320,26 +345,6 @@ margin:30px 0;
                     Karachi, Pakistan
                 </p>
 
-                <div class="social-icons d-flex justify-content-center justify-content-md-start gap-3">
-
-                    <a href="#">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fab fa-github"></i>
-                    </a>
-
-                </div>
-
             </div>
 
         </div>
@@ -357,5 +362,17 @@ margin:30px 0;
     </div>
 
 </footer>
+
+<script>
+window.addEventListener("scroll",()=>{
+const nav=document.querySelector(".navbar");
+if(window.scrollY>50){
+nav.style.background="#020617";
+}else{
+nav.style.background="transparent";
+}
+});
+</script>
+
 </body>
 </html>
