@@ -281,6 +281,44 @@ border-color:#334155;
 margin:30px 0;
 }
 
+/* ---------- Scroll Animations ---------- */
+.scroll-element{
+opacity:0;
+transform:translateY(40px);
+transition:opacity .7s ease, transform .7s ease;
+}
+
+.scroll-element.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+/* Skill bar start state */
+.skill-box .progress{
+transition:width 1.2s ease;
+}
+
+.skill-box .progress-bar{
+width:0%;
+transition:width 1.2s ease;
+}
+
+.skill-box.animate .progress-bar{
+/* width already set inline via style attr */
+}
+
+/* Project cards stagger */
+.project-card{
+opacity:0;
+transform:translateY(30px);
+transition:opacity .6s ease, transform .6s ease, transform .4s;
+}
+
+.project-card.visible{
+opacity:1;
+transform:translateY(0);
+}
+
 </style>
 </head>
 
@@ -369,11 +407,11 @@ CSS, Bootstrap and JavaScript.
 
 <!-- About -->
 <!-- About -->
-<section id="about">
+<section id="about" class="section-block">
 
     <div class="container">
 
-        <h2 class="section-title">About <span>Me</span></h2>
+        <h2 class="section-title scroll-element">About <span>Me</span></h2>
 
         <div class="row align-items-center">
 
@@ -382,33 +420,33 @@ CSS, Bootstrap and JavaScript.
 
                 <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600"
                      alt="Male Developer"
-                     class="about-img img-fluid">
+                     class="about-img img-fluid scroll-element">
 
             </div>
 
             <!-- Content -->
             <div class="col-lg-7">
 
-                <h3>Front-End Developer</h3>
+                <h3 class="scroll-element">Front-End Developer</h3>
 
-                <p>
+                <p class="scroll-element">
                     Passionate front-end developer focused on creating
                     beautiful and responsive user experiences.
                 </p>
 
-                <p>
+                <p class="scroll-element">
                     I work with HTML, CSS, Bootstrap and JavaScript
                     to build modern websites that are fast, responsive,
                     and user-friendly.
                 </p>
 
-                <p>
+                <p class="scroll-element">
                     My goal is to create modern web experiences with
                     clean code, attractive design, and excellent
                     performance across all devices.
                 </p>
 
-                <a href="contact.html" class="btn btn-primary">
+                <a href="contact.html" class="btn btn-primary scroll-element">
                     Contact Me
                 </a>
 
@@ -421,37 +459,37 @@ CSS, Bootstrap and JavaScript.
 </section>
 <!-- Skills -->
 
-<section id="skills">
+<section id="skills" class="section-block">
 
 <div class="container">
 
-<h2 class="section-title">My <span>Skills</span></h2>
+<h2 class="section-title scroll-element">My <span>Skills</span></h2>
 
-<div class="skill-box">
+<div class="skill-box scroll-element">
 HTML
 <div class="progress">
-<div class="progress-bar bg-info" style="width:95%"></div>
+<div class="progress-bar bg-info" data-width="95" style="width:0%"></div>
 </div>
 </div>
 
-<div class="skill-box">
+<div class="skill-box scroll-element">
 CSS
 <div class="progress">
-<div class="progress-bar bg-success" style="width:90%"></div>
+<div class="progress-bar bg-success" data-width="90" style="width:0%"></div>
 </div>
 </div>
 
-<div class="skill-box">
+<div class="skill-box scroll-element">
 Bootstrap
 <div class="progress">
-<div class="progress-bar bg-warning" style="width:88%"></div>
+<div class="progress-bar bg-warning" data-width="88" style="width:0%"></div>
 </div>
 </div>
 
-<div class="skill-box">
+<div class="skill-box scroll-element">
 JavaScript
 <div class="progress">
-<div class="progress-bar bg-danger" style="width:80%"></div>
+<div class="progress-bar bg-danger" data-width="80" style="width:0%"></div>
 </div>
 </div>
 
@@ -460,17 +498,17 @@ JavaScript
 
 <!-- Projects -->
 
-<section id="projects">
+<section id="projects" class="section-block">
 
 <div class="container">
 
-<h2 class="section-title">My <span>Projects</span></h2>
+<h2 class="section-title scroll-element">My <span>Projects</span></h2>
 
 <div class="row g-4">
 
 <div class="col-md-4">
 
-<div class="card project-card">
+<div class="card project-card scroll-element">
 
 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600">
 
@@ -488,7 +526,7 @@ JavaScript
 
 <div class="col-md-4">
 
-<div class="card project-card">
+<div class="card project-card scroll-element">
 
 <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=600">
 
@@ -506,7 +544,7 @@ JavaScript
 
 <div class="col-md-4">
 
-<div class="card project-card">
+<div class="card project-card scroll-element">
 
 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600">
 
@@ -530,13 +568,13 @@ JavaScript
 
 <!-- Contact -->
 
-<section id="contact">
+<section id="contact" class="section-block">
 
 <div class="container">
 
-<h2 class="section-title">Contact <span>Me</span></h2>
+<h2 class="section-title scroll-element">Contact <span>Me</span></h2>
 
-<div class="contact-box">
+<div class="contact-box scroll-element">
 
 <form>
 
@@ -630,6 +668,7 @@ Bootstrap and JavaScript.
 
 <script>
 
+// Navbar background on scroll
 window.addEventListener("scroll",()=>{
 
 const nav=document.querySelector(".navbar");
@@ -640,6 +679,65 @@ nav.style.background="#020617";
 nav.style.background="transparent";
 }
 
+});
+
+// ---------- Scroll-triggered animations ----------
+const animateOnce=()=>{
+
+const els=document.querySelectorAll(".scroll-element");
+
+els.forEach((el)=>{
+
+const rect=el.getBoundingClientRect();
+
+// Trigger when element enters the viewport (top within 100px)
+if(rect.top<window.innerHeight-100){
+el.classList.add("visible");
+}
+
+});
+
+// Skill bars: animate width on first view
+const skillBoxes=document.querySelectorAll(".skill-box");
+skillBoxes.forEach((box)=>{
+
+const bar=box.querySelector(".progress-bar");
+const w=bar.getAttribute("data-width");
+const top=box.getBoundingClientRect().top;
+
+if(top<window.innerHeight-100 && w && bar.style.width==="0%"){
+bar.style.width=w+"%";
+}
+
+});
+
+// Project cards staggered delay
+const cards=document.querySelectorAll(".project-card");
+cards.forEach((card,i)=>{
+
+const top=card.getBoundingClientRect().top;
+if(top<window.innerHeight-100){
+card.classList.add("visible");
+card.style.transitionDelay=(i*0.12)+"s";
+}
+
+});
+
+};
+
+// Run once on load
+animateOnce();
+
+// Run on scroll (throttled via rAF)
+let ticking=false;
+window.addEventListener("scroll",()=>{
+if(!ticking){
+requestAnimationFrame(()=>{
+animateOnce();
+ticking=false;
+});
+ticking=true;
+}
 });
 
 </script>
